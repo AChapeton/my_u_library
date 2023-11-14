@@ -5,7 +5,7 @@ const bookSchema = new mongoose.Schema({
   author: {type: String, required: true},
   publishedYear: {type: Number, required: true},
   genre: {type: String, required: true},
-  stock: {type: Number, required: tryue, min: 0}
-})
+  stock: {type: Number, required: true, min: 0}
+}, {timestamps: true})
 
 export default mongoose.model('Book', bookSchema)
