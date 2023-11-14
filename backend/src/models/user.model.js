@@ -17,6 +17,11 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  type: {
+    type: String,
+    require: true,
+    trim: true
+  },
   requestedBooks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Book'}]
 }, {timestamps: true})
 
