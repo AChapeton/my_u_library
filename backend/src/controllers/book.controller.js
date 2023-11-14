@@ -30,7 +30,7 @@ export const addBook = async (req, res) => {
 
   try{
     const newBook = await Book.create(bookData)
-    return res.sendStatus(201).json(newBook);
+    res.status(201).json(newBook);
   }catch(error){
     res.status(500).json({ message: error.message });
   }
