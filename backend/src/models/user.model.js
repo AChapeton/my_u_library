@@ -17,12 +17,11 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  type: {
+  role: {
     type: String,
-    require: true,
-    trim: true
-  },
-  requestedBooks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Book'}]
+    enum: ['Student', 'Librarian'],
+    required: true,
+  }
 }, {timestamps: true})
 
 export default mongoose.model('User', userSchema)
