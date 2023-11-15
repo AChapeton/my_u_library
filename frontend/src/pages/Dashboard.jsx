@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import useGetBooks from '../api/useGetBooks';
+import BookCard from '../components/BookCard';
 
 const Dashboard = () => {
   const {books, error, isLoading} = useGetBooks()
@@ -21,7 +23,13 @@ const Dashboard = () => {
   return (
     <>
       <h1>Dashboard</h1>
-      {/* <div>{data}</div> */}
+      <div className='row'>
+        {
+          books.map((book => (
+            <BookCard key={book._id} title={book.title} author={book.author}/>
+          )))
+        }
+      </div>
     </>
   )
 }
