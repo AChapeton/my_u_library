@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
 import bookRoutes from "./routes/book.routes.js";
+import loanRoutes from "./routes/loan.routes.js";
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.use(cookieParser())
 
 app.use("/api", authRoutes);
 app.use("/api/books", bookRoutes);
+app.use("/api/loan", loanRoutes);
 
 export default app;
