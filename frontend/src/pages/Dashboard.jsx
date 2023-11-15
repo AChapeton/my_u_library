@@ -26,7 +26,7 @@ const Dashboard = () => {
       <div className='row'>
         {
           books.map((book => (
-            <BookCard key={book._id} title={book.title} author={book.author}/>
+            <BookCard key={book._id} id={book._id} title={book.title} author={book.author}/>
           )))
         }
       </div>
