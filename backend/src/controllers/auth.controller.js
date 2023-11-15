@@ -60,12 +60,15 @@ export const login = async (req, res) => {
     res.cookie("token", token);
 
     //Return the credentials to the user
+    // res.json({
+    //   id: userFound._id,
+    //   username: userFound.username,
+    //   email: userFound.email,
+    //   role: userFound.role,
+    // });
     res.json({
-      id: userFound._id,
-      username: userFound.username,
-      email: userFound.email,
-      role: userFound.role,
-    });
+      token: token
+    })
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

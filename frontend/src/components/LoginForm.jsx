@@ -1,7 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import useLogin from "../api/useLogin";
 
 const LoginForm = () => {
+  const {fetchLogin} = useLogin()
   const {
     register,
     handleSubmit,
@@ -10,6 +12,8 @@ const LoginForm = () => {
 
   const onSubmit = handleSubmit((data, errors) => {
     console.log("data: ", data);
+    fetchLogin(data)
+    
   });
 
   return (

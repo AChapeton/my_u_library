@@ -3,24 +3,24 @@ import {useQuery} from '@tanstack/react-query'
 import useGetBooks from '../api/useGetBooks';
 
 const Dashboard = () => {
-  const {getBooks} = useGetBooks()
-  const [books, setBooks] = useState([])
+  // const {getBooks} = useGetBooks()
+  // const [books, setBooks] = useState([])
 
-  useEffect(()=>{
-    const fetchBooks = async ()=> {
-      try{
-        const response =  await getBooks()
-        const bookData = await response.json()
-        setBooks(bookData)
-      }catch(error){
-        console.errro('fetch error: ', error)
-      }
-    }
+  // useEffect(()=>{
+  //   const fetchBooks = async ()=> {
+  //     try{
+  //       const response =  await getBooks()
+  //       const bookData = await response.json()
+  //       setBooks(bookData)
+  //     }catch(error){
+  //       console.errro('fetch error: ', error)
+  //     }
+  //   }
 
-    fetchBooks()
-  }, [getBooks])
+  //   fetchBooks()
+  // }, [getBooks])
 
-  console.log('books: ', books)
+  // console.log('books: ', books)
 
   return (
     <>
