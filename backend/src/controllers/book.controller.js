@@ -4,7 +4,7 @@ import Book from "../models/book.model.js";
 export const getAllBooks = async (req, res) => {
   try{
     const books = await Book.find()
-    if (!books)
+    if (books.length === 0)
       return res.status(400).json({ message: "No books were found." });
     res.status(200).json(books)
   }catch(error){
