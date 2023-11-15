@@ -10,7 +10,7 @@ const router = Router();
 
 //Protected routes - Use a middleware to corroborate after finishing http request
 router.get("/", authRequired, getAllBooks);
-router.get("/book:id", authRequired, getBookById);
+router.get("/:id", authRequired, getBookById);
 router.post("/add_book", authRequired, addBook);
 
 export default router;

@@ -14,12 +14,14 @@ export const getAllBooks = async (req, res) => {
 
 // Obtain an specficic book
 export const getBookById = async (req, res) => {
-  const {_id} = req.params
+  const {id} = req.params
   try{
-    const book = await Book.findById(_id)
+    console.log(`Searching for book with ID: ${id}`)
+    const book = await Book.findById(id)
     if(!book) return res.status(400).json({ message: "This id is not related to any book." });
     res.status(200).json(book)
   }catch(error){
+    console.error(`Error fetching book by ID: ${error.message}`);
     res.status(500).json({ message: error.message });
   }
 }
