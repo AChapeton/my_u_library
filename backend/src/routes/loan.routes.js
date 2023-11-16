@@ -1,8 +1,11 @@
 import express from 'express'
-import { getUserLoans, requestLoan, returnLoan } from '../controllers/loan.controller.js'
+import { getLoans, getUserLoans, requestLoan, returnLoan } from '../controllers/loan.controller.js'
 import { authRequired } from '../middlewares/validateToken.js'
 
 const router = express.Router()
+
+//Route to get all loans
+router.get("/", getLoans);
 
 // Route to get all loans for a specific user
 router.get('/:userId/loans', getUserLoans);

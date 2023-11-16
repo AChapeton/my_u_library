@@ -1,12 +1,24 @@
 import Loan from '../models/loan.model.js'
 import Book from '../models/book.model.js'
 
+// Get all loans
+export const getLoans = async (req, res) => {
+  try{
+    const loans = await Loan.find().populate('user').populate('book')
+    if (loans.length === 0)
+      return res.status(400).json({ message: "No loans were found." });
+    res.status(200).json(loans)
+  }catch(error){
+    res.status(500).json({ message: error.message });
+  }
+}
+
 //Get loans for a specific user
 export const getUserLoans = async (req, res) => {
   const {userId} = req.params
   
   try{
-    const loans = await Loan.find({user: userId}).populate('book')
+    const loans = await Loan.find({user: userId}).populate('user').populate('book')
 
     res.status(200).json({loans})
   }catch(error){

@@ -21,16 +21,19 @@ const Requests = () => {
     <>
       <h1>User Loans</h1>
       <div className="row">
-        {userLoans.map((loan) => (
-          <BookCard
-            key={loan.book._id}
-            id={loan.book_id}
-            title={loan.book.title}
-            author={loan.book.author}
-            genre={loan.book.genre}
-            isCheckOut={false}
-          />
-        ))}
+        {userLoans.map((loan) => {
+          console.log(loan.isCheckedOut)
+          if(loan.isCheckedOut){
+            return (<BookCard
+              key={loan.book._id}
+              id={loan.book_id}
+              title={loan.book.title}
+              author={loan.book.author}
+              genre={loan.book.genre}
+              isCheckOut={false}
+            />)
+          }
+      })}
       </div>
     </>
   )
