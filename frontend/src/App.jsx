@@ -7,6 +7,7 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
+import useSessionStore from "./store/useSessionStore";
 import Dashboard from "./pages/Dashboard";
 import Book from "./pages/Book";
 import Login from "./pages/Login";
@@ -17,6 +18,7 @@ import Layout from "./components/Layout";
 import Navbar from "./components/Navbar";
 import Cookies from "js-cookie";
 import Error404 from "./pages/Error404";
+import AddBook from "./pages/AddBook";
 
 const isAuthenticated = () => {
   const token = Cookies.get("token");
@@ -26,9 +28,10 @@ const isAuthenticated = () => {
 
 function App() {
   const location = useLocation();
-  console.log(location);
   const isLoginPage = location.pathname === "/login";
-  console.log(isLoginPage);
+
+  const {account} = useSessionStore()
+  console.log('account: ', account)
 
   return (
     <Layout>
@@ -42,6 +45,10 @@ function App() {
         <Route
           path="/book/:id"
           element={isAuthenticated() ? <Book /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="create-book"
+          element={isAuthenticated() ? <AddBook/> : <Navigate to="/login" />}
         />
         <Route
           path="/register"

@@ -1,9 +1,11 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import useSessionStore from "../store/useSessionStore";
 import useLogout from "../api/useLogout";
 
 const Navbar = () => {
   const {fetchLogout} = useLogout()
+  const {account} = useSessionStore()
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,19 +31,32 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/register">
-                Register a new Student
-              </Link>
-            </li>
+            {
+              account.role === "librarian"
+              ? (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/create-book">
+                      Create Book
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/register">
+                      Register a new Student
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/check-returns">
+                      Check Returns
+                    </Link>
+                  </li>
+                </>
+              )
+              : null
+            }
             <li className="nav-item">
               <Link className="nav-link" to="/requests">
                 Check Requests
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/check-returns">
-                Check Returns
               </Link>
             </li>
             <li className="nav-item">

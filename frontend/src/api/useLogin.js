@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import useSessionStore from "../store/useSessionStore";
 import Cookies from "js-cookie";
 
 const useLogin = () => {
   const navigate = useNavigate()
+  const {setAccountData} = useSessionStore()
   
   const fetchLogin = async (login_data) => {
     try {
@@ -19,10 +21,18 @@ const useLogin = () => {
       }
 
       console.log('response: ', response)
-      let {token} = await response.json();
-      console.log('token: ', token);
+      let data = await response.json();
+      console.log('data: ', data);
+      const {token, id, username, email, role} = data
       Cookies.set('token', token, {expires: 1})
+      setAccountData({
+        id: id,
+        username: username,
+        email: email,
+        role: role
+      })
       navigate("/")
+      return data
     } catch (error) {
       console.log(error)
     }

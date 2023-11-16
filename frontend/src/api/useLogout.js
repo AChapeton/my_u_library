@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import useSessionStore from "../store/useSessionStore";
 import Cookies from "js-cookie";
 
 const useLogout = () => {
   const navigate = useNavigate()
+  const {setLogout} = useSessionStore()
   
   const fetchLogout = async () => {
     try {
@@ -18,6 +20,7 @@ const useLogout = () => {
       }
 
       Cookies.remove('token')
+      setLogout()
       navigate("/login")
     } catch (error) {
       console.log(error)
