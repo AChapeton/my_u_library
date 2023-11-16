@@ -1,16 +1,23 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import useRegister from "../api/useRegister";
 
 const RegisterForm = () => {
+  const { fetchRegister } = useRegister();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
+    reset,
   } = useForm();
 
   const onSubmit = handleSubmit((data, errors) => {
+    delete data.confirm_password
     console.log("data: ", data);
+    fetchRegister(data);
+    reset();
   });
 
   return (
@@ -31,8 +38,8 @@ const RegisterForm = () => {
                 <option value="" hidden>
                   Choose a role
                 </option>
-                <option value="librarian">Student</option>
-                <option value="student">Librarian</option>
+                <option value="student">Student</option>
+                <option value="librarian">Librarian</option>
               </select>
             </div>
             {errors.role ? (
