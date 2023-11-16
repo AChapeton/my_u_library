@@ -16,6 +16,7 @@ import CheckReturns from "./pages/CheckReturns";
 import Layout from "./components/Layout";
 import Navbar from "./components/Navbar";
 import Cookies from "js-cookie";
+import Error404 from "./pages/Error404";
 
 const isAuthenticated = () => {
   const token = Cookies.get("token");
@@ -35,7 +36,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
-          path="/"
+          path="/" exact
           element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />}
         />
         <Route
@@ -58,6 +59,7 @@ function App() {
             isAuthenticated() ? <CheckReturns /> : <Navigate to="/login" />
           }
         />
+        <Route path="*" element={<Error404/>} />
       </Routes>
     </Layout>
   );
