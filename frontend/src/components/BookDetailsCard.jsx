@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import usePostLoan from "../api/usePostLoan";
 
 const BookDetailsCard = ({ book }) => {
+  const {fetchPostLoan} = usePostLoan()
+
+  const handleLoan = () => {
+    fetchPostLoan()
+  }
+
   return (
     <div className="col-6 mt-5">
       <div className="card">
@@ -20,7 +26,7 @@ const BookDetailsCard = ({ book }) => {
           <p className="card-text">
             <span className="font-weight-bold">Stock:</span> {book.stock}
           </p>
-          <button type="button" className="btn btn-primary w-100">
+          <button type="button" className="btn btn-primary w-100" onClick={handleLoan}>
             Request book
           </button>
         </div>
