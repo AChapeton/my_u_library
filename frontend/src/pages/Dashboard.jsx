@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useGetBooks from "../api/useGetBooks";
 import BookCard from "../components/BookCard";
+import NoDataFound from "../components/NoDataFound";
 
 const Dashboard = () => {
   const { books, error, isLoading } = useGetBooks();
@@ -36,6 +37,15 @@ const Dashboard = () => {
 
   if (error) {
     return <div>Error: {error.message}</div>;
+  }
+
+  if(books.length === 0){
+    return (
+      <>
+        <h2>Returns</h2>
+        <NoDataFound message="You do not have books in the library"/>
+      </>
+    )
   }
 
   return (

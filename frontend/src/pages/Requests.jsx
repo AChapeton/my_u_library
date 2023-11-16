@@ -1,6 +1,7 @@
 import React from 'react'
 import useGetUserLoans from '../api/useGetUsersLoans'
 import BookCard from '../components/BookCard'
+import NoDataFound from '../components/NoDataFound';
 
 const Requests = () => {
   const { userLoans, error, isLoading } = useGetUserLoans();
@@ -17,6 +18,15 @@ const Requests = () => {
     return <div>Error: {error.message}</div>;
   }
 
+  if(userLoans.length === 0){
+    return (
+      <>
+        <h1>User Loans</h1>
+        <NoDataFound message="You do not have books on loan"/>
+      </>
+    )
+  }
+
   return (
     <>
       <h1>User Loans</h1>
@@ -25,7 +35,7 @@ const Requests = () => {
           console.log(loan.isCheckedOut)
           if(loan.isCheckedOut){
             return (<BookCard
-              key={loan.book._id}
+              key={loan._id}
               id={loan.book_id}
               title={loan.book.title}
               author={loan.book.author}

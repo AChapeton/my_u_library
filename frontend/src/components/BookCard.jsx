@@ -1,4 +1,5 @@
 import React from "react";
+import {format, parseISO} from 'date-fns'
 import { Link } from "react-router-dom";
 import useReturnLoan from "../api/useReturnLoan";
 
@@ -10,11 +11,18 @@ const BookCard = ({
   isCheckOut,
   username,
   isReturn,
+  returnDate
 }) => {
   const { fetchReturnLoan } = useReturnLoan();
+
   const handleReturn = () => {
     fetchReturnLoan(id);
   };
+
+  const formattedReturnDate = returnDate
+  ? format(new Date(returnDate), "MM/dd/yy H:mm")
+  : "N/A";
+
 
   return (
     <div className="col-3 mb-4">
@@ -34,6 +42,11 @@ const BookCard = ({
           {genre ? (
             <p className="card-text">
               <span className="font-weight-bold">Genre:</span> {genre}
+            </p>
+          ) : null}
+          {returnDate ? (
+            <p className="card-text">
+              <span className="font-weight-bold">Return Date:</span> {formattedReturnDate}
             </p>
           ) : null}
 
