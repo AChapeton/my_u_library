@@ -1,8 +1,12 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
 import useAddBook from '../api/useAddBook';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from 'react-router-dom';
 
 const AddBookForm = ({currentYear}) => {
+  const navigate = useNavigate();
   const {fetchAddBook} = useAddBook()
 
   const {
@@ -12,14 +16,28 @@ const AddBookForm = ({currentYear}) => {
     reset,
   } = useForm();
 
-  const onSubmit = handleSubmit((data, errors) => {
-    console.log("data: ", data);
-    fetchAddBook(data)
-    reset();
+  const onSubmit = handleSubmit(async (data, errors) => {
+    try{
+      await fetchAddBook(data)
+      reset();
+      navigate("/?new_book=true");
+    }catch(error){
+      toast.error("Something went wrong. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   });
 
   return (
     <div className="card">
+      <ToastContainer />
       <div className="card-body">
         <h3 className="card-title">Create a new Book</h3>
         <form onSubmit={onSubmit}>

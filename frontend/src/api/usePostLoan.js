@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import useSessionStore from "../store/useSessionStore";
-import { useNavigate } from "react-router-dom";
+
 const usePostLoan = () => {
   const token = Cookies.get("token");
   const {account} = useSessionStore()

@@ -1,8 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useRegister from "../api/useRegister";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const { fetchRegister } = useRegister();
 
   const {
@@ -13,15 +17,29 @@ const RegisterForm = () => {
     reset,
   } = useForm();
 
-  const onSubmit = handleSubmit((data, errors) => {
-    delete data.confirm_password
-    console.log("data: ", data);
-    fetchRegister(data);
-    reset();
+  const onSubmit = handleSubmit(async (data, errors) => {
+    try{
+      delete data.confirm_password
+      await fetchRegister(data);
+      reset();
+      navigate("/?new_user=true");
+    }catch(error){
+      toast.error("Something went wrong. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   });
 
   return (
     <div className="card">
+      <ToastContainer />
       <div className="card-body">
         <h3 className="card-title">Register a new Student</h3>
         <form onSubmit={onSubmit}>

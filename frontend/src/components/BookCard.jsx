@@ -1,7 +1,9 @@
 import React from "react";
 import {format, parseISO} from 'date-fns'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useReturnLoan from "../api/useReturnLoan";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BookCard = ({
   id,
@@ -13,10 +15,25 @@ const BookCard = ({
   isReturn,
   returnDate
 }) => {
+  const navigate = useNavigate();
   const { fetchReturnLoan } = useReturnLoan();
 
-  const handleReturn = () => {
-    fetchReturnLoan(id);
+  const handleReturn = async () => {
+    try{
+      await fetchReturnLoan(id);
+      navigate("/?return_book=true");
+    }catch(error){
+      toast.error("Something went wrong. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   const formattedReturnDate = returnDate
@@ -26,6 +43,7 @@ const BookCard = ({
 
   return (
     <div className="col-3 mb-4">
+      <ToastContainer />
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
