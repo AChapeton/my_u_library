@@ -56,6 +56,7 @@ const Dashboard = () => {
             title={book.title}
             author={book.author}
             genre={book.genre}
+            isCheckOut={true}
           />
         ))}
       </div>
