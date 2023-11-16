@@ -23,14 +23,6 @@ const isAuthenticated = () => {
   return !!token;
 };
 
-const PrivateRoute = ({ element, ...rest }) => {
-  return isAuthenticated() ? (
-    <Route {...rest} element={element} />
-  ) : (
-    <Navigate to="/login" />
-  );
-};
-
 function App() {
   const location = useLocation();
   console.log(location);
@@ -42,44 +34,29 @@ function App() {
       {!isLoginPage && <Navbar />}
       <Routes>
         <Route path="/login" element={<Login />} />
-        {isAuthenticated() ? (
-          <Route path="/" element={<Dashboard />} />
-        ) : (
-          <Navigate to="/login" />
-        )}
-        {/* <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} /> */}
-        {isAuthenticated() ? (
-          <Route path="/book/:id" element={<Book />} />
-        ) : (
-          <Navigate to="/login" />
-        )}
-        {/* <Route path="/book/:id" element={<PrivateRoute element={<Book />} />} /> */}
-        {isAuthenticated() ? (
-          <Route path="/register" element={<RegisterStudent />} />
-        ) : (
-          <Navigate to="/login" />
-        )}
-        {/* <Route
+        <Route
+          path="/"
+          element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/book/:id"
+          element={isAuthenticated() ? <Book /> : <Navigate to="/login" />}
+        />
+        <Route
           path="/register"
-          element={<PrivateRoute element={<RegisterStudent />} />}
-        /> */}
-        {isAuthenticated() ? (
-          <Route path="/requests" element={<Requests />} />
-        ) : (
-          <Navigate to="/login" />
-        )}
-        {/* <Route
+          element={
+            isAuthenticated() ? <RegisterStudent /> : <Navigate to="/login" />
+          }
+        />
+        <Route
           path="/requests"
-          element={<PrivateRoute element={<Requests />} />}
-        /> */}
-        {isAuthenticated() ? (
-          <Route path="/check-returns" element={<CheckReturns />} />
-        ) : (
-          <Navigate to="/login" />
-        )}
+          element={isAuthenticated() ? <Requests /> : <Navigate to="/login" />}
+        />
         <Route
           path="/check-returns"
-          element={<PrivateRoute element={<CheckReturns />} />}
+          element={
+            isAuthenticated() ? <CheckReturns /> : <Navigate to="/login" />
+          }
         />
       </Routes>
     </Layout>
