@@ -1,6 +1,19 @@
 import Loan from '../models/loan.model.js'
 import Book from '../models/book.model.js'
 
+//Get loans for a specific user
+export const getUserLoans = async (req, res) => {
+  const {userId} = req.params
+  
+  try{
+    const loans = await Loan.find({user: userId}).populate('book')
+
+    res.status(200).json({loans})
+  }catch(error){
+    res.status(500).json({message: error.message})
+  }
+}
+
 //Request a book
 export const requestLoan = async (req, res) => {
   const {userId, bookId} = req.params;
