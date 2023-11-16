@@ -31,6 +31,8 @@ const Requests = () => {
               author={loan.book.author}
               genre={loan.book.genre}
               isCheckOut={false}
+              username={false}
+              isReturn={false}
             />)
           }
       })}
