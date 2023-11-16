@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useLogin from "../api/useLogin";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
   const {fetchLogin} = useLogin()
@@ -8,16 +10,31 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
 
-  const onSubmit = handleSubmit((data, errors) => {
-    console.log("data: ", data);
-    fetchLogin(data)
-    
+  const onSubmit = handleSubmit(async (data, errors) => {
+    try{
+      console.log("data: ", data);
+      const response = await fetchLogin(data)
+    }catch(error){
+      toast.error("Invalid credentials. Please try again.", {
+        position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+    }
+    reset()
   });
 
   return (
     <div className="card">
+      <ToastContainer/>
       <div className="card-body">
         <h3 className="card-title">Login</h3>
         <form onSubmit={onSubmit}>

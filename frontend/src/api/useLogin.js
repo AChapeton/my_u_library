@@ -7,7 +7,6 @@ const useLogin = () => {
   const {setAccountData} = useSessionStore()
   
   const fetchLogin = async (login_data) => {
-    try {
       const response = await fetch('http://127.0.0.1:4000/api/login', {
         method: 'POST',
         body: JSON.stringify(login_data),
@@ -17,7 +16,7 @@ const useLogin = () => {
       });
 
       if (!response.ok) {
-        throw new Error(response.statusText);
+        throw new Error("Invalid credentials");
       }
 
       console.log('response: ', response)
@@ -33,9 +32,6 @@ const useLogin = () => {
       })
       navigate("/")
       return data
-    } catch (error) {
-      console.log(error)
-    }
   };
 
   return {fetchLogin}
