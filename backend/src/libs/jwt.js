@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { TOKEN_SECRET } from '../../config';
+import { TOKEN_SECRET } from '../config';
 
 export const createAccessToken = (payload) => {
   return new Promise((resolve, reject) => {
