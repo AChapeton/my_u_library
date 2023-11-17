@@ -2,12 +2,14 @@ import React from "react";
 import Cookies from "js-cookie";
 import { useQuery } from "react-query";
 
+const BASE_URL = process.env.BASE_URL
+
 const getBook = async () => {
   const token = Cookies.get("token");
   const url = window.location.pathname.split("/book/")
   const id = url[1]
   try {
-    const response = await fetch(`http://127.0.0.1:4000/api/books/${id}`, {
+    const response = await fetch(`${BASE_URL}/books/${id}`, {
       method: "GET",
       headers: {
         Authorization: token,

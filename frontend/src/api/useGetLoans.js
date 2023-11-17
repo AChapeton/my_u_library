@@ -1,12 +1,13 @@
 import React from "react";
 import Cookies from "js-cookie";
 import { useQuery } from "react-query";
+const BASE_URL = process.env.BASE_URL
 
 const getLoans = async () => {
   const token = Cookies.get("token");
 
   try {
-    const response = await fetch("http://127.0.0.1:4000/api/loan", {
+    const response = await fetch(`${BASE_URL}/loan`, {
       method: "GET",
       headers: {
         Authorization: token,

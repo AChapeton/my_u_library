@@ -1,7 +1,9 @@
+const BASE_URL = process.env.BASE_URL
+
 const useRegister = () => {
   
   const fetchRegister = async (register_data) => {
-      const response = await fetch('http://127.0.0.1:4000/api/register', {
+      const response = await fetch(`${BASE_URL}/api/register`, {
         method: 'POST',
         body: JSON.stringify(register_data),
         headers: {

@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import useSessionStore from "../store/useSessionStore";
 import Cookies from "js-cookie";
+const BASE_URL = process.env.BASE_URL
 
 const useLogin = () => {
   const navigate = useNavigate()
   const {setAccountData} = useSessionStore()
   
   const fetchLogin = async (login_data) => {
-      const response = await fetch('http://127.0.0.1:4000/api/login', {
+      const response = await fetch(`${BASE_URL}/login`, {
         method: 'POST',
         body: JSON.stringify(login_data),
         headers: {
