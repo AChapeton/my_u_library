@@ -1,10 +1,9 @@
 import mongoose from 'mongoose'
-
-const URI = "mongodb://127.0.0.1/uni_library";
+import {MONGO_URI} from '../config';
 
 export const connectDB = async () => {
   try{
-    await mongoose.connect(URI)
+    await mongoose.connect(MONGO_URI)
     console.log('DB is connected')
   }catch(error){
     console.log(error)
