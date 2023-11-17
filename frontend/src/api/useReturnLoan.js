@@ -1,10 +1,10 @@
 import Cookies from "js-cookie";
 
-const BASE_URL = process.env.BASE_URL
+const baseUrl  = import.meta.env.VITE_BASE_URL;
 const useReturnLoan = () => {
   const token = Cookies.get("token");
   const fetchReturnLoan = async (loan_id) => {
-      const response = await fetch(`${BASE_URL}/loan/${loan_id}/return`, {
+      const response = await fetch(`${baseUrl}/loan/${loan_id}/return`, {
         method: 'PUT',
         headers: {
           Authorization: token,

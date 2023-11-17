@@ -6,11 +6,9 @@ const baseUrl  = import.meta.env.VITE_BASE_URL;
 const useLogin = () => {
   const navigate = useNavigate()
   const {setAccountData} = useSessionStore()
-  console.log('base url: ', baseUrl )
-  console.log('env: ', import.meta.env.env.VITE_BASE_URL)
   
   const fetchLogin = async (login_data) => {
-      const response = await fetch(`${baseUrl }/login`, {
+      const response = await fetch(`${baseUrl}/login`, {
         method: 'POST',
         body: JSON.stringify(login_data),
         headers: {

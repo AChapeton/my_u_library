@@ -1,9 +1,9 @@
-const BASE_URL = process.env.BASE_URL
+const baseUrl  = import.meta.env.VITE_BASE_URL;
 
 const useRegister = () => {
   
   const fetchRegister = async (register_data) => {
-      const response = await fetch(`${BASE_URL}/api/register`, {
+      const response = await fetch(`${baseUrl}/api/register`, {
         method: 'POST',
         body: JSON.stringify(register_data),
         headers: {

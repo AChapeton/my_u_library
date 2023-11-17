@@ -1,13 +1,13 @@
 import React from "react";
 import Cookies from "js-cookie";
 import { useQuery } from "react-query";
-const BASE_URL = process.env.BASE_URL
+const baseUrl  = import.meta.env.VITE_BASE_URL;
 
 const getLoans = async () => {
   const token = Cookies.get("token");
 
   try {
-    const response = await fetch(`${BASE_URL}/loan`, {
+    const response = await fetch(`${baseUrl}/loan`, {
       method: "GET",
       headers: {
         Authorization: token,

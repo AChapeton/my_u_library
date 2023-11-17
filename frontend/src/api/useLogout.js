@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import useSessionStore from "../store/useSessionStore";
 import Cookies from "js-cookie";
-const BASE_URL = process.env.BASE_URL
+const baseUrl  = import.meta.env.VITE_BASE_URL;
 
 const useLogout = () => {
   const navigate = useNavigate()
@@ -9,7 +9,7 @@ const useLogout = () => {
   
   const fetchLogout = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/logout`, {
+      const response = await fetch(`${baseUrl}/logout`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"

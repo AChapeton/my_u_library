@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import useSessionStore from "../store/useSessionStore";
-const BASE_URL = process.env.BASE_URL
+const baseUrl  = import.meta.env.VITE_BASE_URL;
 
 const usePostLoan = () => {
   const token = Cookies.get("token");
@@ -9,7 +9,7 @@ const usePostLoan = () => {
   const url = window.location.pathname.split("/book/")
   const bookd_id = url[1]
   const fetchPostLoan = async (loan_data) => {
-      const response = await fetch(`${BASE_URL}/loan/${user_id}/request/${bookd_id}`, {
+      const response = await fetch(`${baseUrl}/loan/${user_id}/request/${bookd_id}`, {
         method: 'POST',
         body: JSON.stringify(loan_data),
         headers: {
