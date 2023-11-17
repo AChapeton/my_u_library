@@ -20,9 +20,7 @@ const useLogin = () => {
         throw new Error("Invalid credentials");
       }
 
-      console.log('response: ', response)
       let data = await response.json();
-      console.log('data: ', data);
       const {token, id, username, email, role} = data
       Cookies.set('token', token, {expires: 1})
       setAccountData({

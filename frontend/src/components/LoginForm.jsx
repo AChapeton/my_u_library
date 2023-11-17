@@ -15,7 +15,6 @@ const LoginForm = () => {
 
   const onSubmit = handleSubmit(async (data, errors) => {
     try{
-      console.log("data: ", data);
       const response = await fetchLogin(data)
     }catch(error){
       toast.error("Invalid credentials. Please try again.", {
