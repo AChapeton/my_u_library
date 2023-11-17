@@ -5,11 +5,14 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
 import bookRoutes from "./routes/book.routes.js";
 import loanRoutes from "./routes/loan.routes.js";
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express();
 
 // Settings
-app.set("port", 4000);
+app.set("port", process.env.PORT);
 
 // Middlewares
 app.use(cors());
