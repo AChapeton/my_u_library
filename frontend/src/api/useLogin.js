@@ -6,6 +6,7 @@ const BASE_URL = process.env.BASE_URL
 const useLogin = () => {
   const navigate = useNavigate()
   const {setAccountData} = useSessionStore()
+  console.log('base url: ', BASE_URL)
   
   const fetchLogin = async (login_data) => {
       const response = await fetch(`${BASE_URL}/login`, {
